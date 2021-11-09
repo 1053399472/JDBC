@@ -1,5 +1,7 @@
 package JDBC.connectionByHand;
 
+
+
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
@@ -21,15 +23,16 @@ public class connection {
         String sql1 = "select id,name,email,birth from customers where id<?";
 
 //       java.sql.Date date= new java.sql.Date(parse.getTime());
-        List<Customer> query = Query(Customer.class, sql1, 12);
-        query.forEach(System.out::println);
-//        foreach依次输出
-        int xuan = update(sql, "xuan", "nezha@gmail.com", new Date(parse.getTime()));
+        int xuan = update(sql, "xua", "nezha@gmail.com", new Date(parse.getTime()));
         if (xuan > 0) {
             System.out.println("更改成功");
         } else {
             System.out.println("更改失败");
         }
+        List<Customer> query = Query(Customer.class, sql1, 30);
+        query.forEach(System.out::println);
+//        foreach依次输出
+
         //preparedStatement.setDate(3, new Date(parse.getTime()));
     }
 
@@ -42,7 +45,7 @@ public class connection {
             for (int i = 0; i < args.length; i++) {
                 preparedStatement.setObject(i + 1, args[i]);
             }
-            int i = preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
